@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Cronet Solution</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="USER_INFO">USER INFO</string>
+    <string name="USER_TYPE">USER TYPE</string>
+    <string name="USERNAME">USERNAME</string>
+    <string name="DATE_JOINED">DATE_JOINED</string>
+    <string name="WELCOME_PAGE">WELCOME_PAGE</string>
+    <string name="USER_STATE">USER_STATE</string>
+    <string name="USER_LGA">USER_LGA</string>
+    <string name="UPLOADS">UPLOADS</string>
+    <string name="EMAIL">EMAIL</string>
+    <string name="IMAGE">IMAGE</string>
+    <string name="USER_IMAGE">USER_IMAGE</string>
+</resources>

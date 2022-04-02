@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ActivityCheckout">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Checkout"
+                    android:textStyle="bold"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="30"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/checkout_summary"
+            android:layout_width="0dp"
+            android:layout_weight="10"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_marginHorizontal="5dp"
+            android:background="@drawable/round_corner_selected"
+            android:layout_height="wrap_content"
+            android:text="Summary"/>
+
+        <TextView
+            android:id="@+id/checkout_payment"
+            android:layout_width="0dp"
+            android:layout_weight="10"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_marginHorizontal="5dp"
+            android:background="@drawable/round_corner"
+            android:layout_height="wrap_content"
+            android:text="Payment"/>
+
+        <TextView
+            android:id="@+id/checkout_confirm"
+            android:layout_width="0dp"
+            android:layout_weight="10"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_marginHorizontal="5dp"
+            android:background="@drawable/round_corner"
+            android:layout_height="wrap_content"
+            android:text="Confirm"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/checkout_framelayout"/>
+
+</LinearLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/welcome_stepper_row_image"
+        android:layout_width="204dp"
+        android:layout_height="204dp"
+        android:gravity="center"
+        android:src="@drawable/lemon"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/welcome_stepper_row_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:textColor="@color/black"
+        android:layout_margin="30dp"
+        android:text="Sample text"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
+</LinearLayout>

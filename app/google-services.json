@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "561957229693",
+    "project_id": "cronet-solution",
+    "storage_bucket": "cronet-solution.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561957229693:android:9b1af88d3cc9b48d394d14",
+        "android_client_info": {
+          "package_name": "com.iodaniel.cronetsolution"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "561957229693-nle2lfibl80ae660k772qjmoc511dam7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iodaniel.cronetsolution",
+            "certificate_hash": "c45f4a2566efec417cfe0c9f9bb3a67c74c257fe"
+          }
+        },
+        {
+          "client_id": "561957229693-2l5obg1gd88ae4pdvb737s20pfnh2cml.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb1ZMyMVJvxzq58cmPJhcCJjCPl8vqzVQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "561957229693-2l5obg1gd88ae4pdvb737s20pfnh2cml.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

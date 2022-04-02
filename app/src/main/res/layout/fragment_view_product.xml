@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?attr/colorPrimary"
+    android:layout_height="match_parent">
+
+    <com.iodaniel.cronetsolution.AccessibleImageView
+        android:id="@+id/fragment_view_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:src="@drawable/cabbage" />
+
+    <TextView
+        android:id="@+id/fragment_view_product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center"
+        android:text="Product Name"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="?attr/colorSecondary"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

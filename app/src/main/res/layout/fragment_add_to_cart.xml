@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/add_to_cart_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="20dp"
+                android:src="@color/placeholder_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/add_to_cart_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Product Name" />
+
+
+                <LinearLayout
+                    android:id="@+id/product_discount_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="2dp"
+                        android:text="₦"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/add_to_cart_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="2dp"
+                        android:text="Discount"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:ellipsize="marquee"
+                android:gravity="end|center"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="Total:"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cart_currency_total"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:ellipsize="end"
+                android:gravity="end|center"
+                android:text="₦ "
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/add_to_cart_price_total"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:ellipsize="marquee"
+                android:gravity="end|center"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="10,000,000"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:gravity="center|end"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quantity"
+                android:textColor="?android:attr/textColorPrimary" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal"
+                android:paddingVertical="5dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cart_decrease"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_margin="5dp"
+                    android:elevation="10dp"
+                    android:gravity="center"
+                    app:cardCornerRadius="5dp">
+
+                    <TextView
+                        android:id="@+id/add_to_cart_negative"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="@drawable/gray_ripple"
+                        android:gravity="center"
+                        android:text="-"
+                        android:textSize="16sp" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/add_to_cart_quantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="16sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cart_increase"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_margin="5dp"
+                    android:elevation="10dp"
+                    android:gravity="center"
+                    app:cardCornerRadius="5dp">
+
+                    <TextView
+                        android:id="@+id/add_to_cart_positive"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="@drawable/gray_ripple"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textSize="16sp" />
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end|center"
+            android:orientation="horizontal">
+
+            <ProgressBar
+                android:id="@+id/add_to_cart_adding_progress"
+                android:layout_width="35dp"
+                android:visibility="gone"
+                android:layout_height="35dp"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/add_to_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:foreground="@drawable/gray_ripple"
+                app:cardCornerRadius="3dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Add to Cart"
+                    android:textColor="?android:attr/textColorPrimary" />
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/add_to_cart_checkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            android:foreground="@drawable/gray_ripple"
+            app:cardCornerRadius="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Proceed to checkout"
+                android:textColor="?android:attr/textColorPrimary" />
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/add_to_cart_scrim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ddFFFFFF"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+</LinearLayout>
