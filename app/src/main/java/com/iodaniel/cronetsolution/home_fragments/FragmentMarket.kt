@@ -31,10 +31,8 @@ import com.iodaniel.cronetsolution.util.UserRegisterListener
 import com.iodaniel.cronetsolution.util.UserTypeListener
 import com.iodaniel.cronetsolution.util.UserTypes
 import kotlinx.coroutines.*
-import kotlin.random.Random
 
-class FragmentMarket : Fragment(), DataSetSizeListener, NetworkListener, OnClickListener,
-    DataReadyListener, FragmentHelper, NotificationFromRecyclerView,
+class FragmentMarket : Fragment(), DataSetSizeListener, NetworkListener, OnClickListener, DataReadyListener, FragmentHelper, NotificationFromRecyclerView,
     HotDataListener, UserTypeListener, UserRegisterListener {
     private lateinit var binding: FragmentMarketBinding
 
@@ -71,10 +69,12 @@ class FragmentMarket : Fragment(), DataSetSizeListener, NetworkListener, OnClick
         cn.setCustomInternetListener(object : InternetConnection.CheckInternetConnection {
             override fun isConnected() {
                 runBlocking {
+                    // WAIT FOR DATA
                     val timeoutJob = scope.async {
                         delay(20_000L)
-                        if (allData.isEmpty()) networkListener.noNetwork()
+                        if (allData.isEmpty()) networkListener.noNetwork() else dataReadyListener.dataReady()
                     }
+                    if (allData.isNotEmpty()) dataReadyListener.dataReady() else dataReadyListener.dataNotReady()
                 }
             }
 
@@ -102,7 +102,6 @@ class FragmentMarket : Fragment(), DataSetSizeListener, NetworkListener, OnClick
         cn = InternetConnection(requireContext())
         networkListener = this
         dataReadyListener = this
-        binding.fragmentMarketShimmer.startShimmerAnimation()
 
         when (auth) {
             null -> userRegisterListener.unregistered()
@@ -122,24 +121,21 @@ class FragmentMarket : Fragment(), DataSetSizeListener, NetworkListener, OnClick
         marketAdapter.fragmentHelper = this
         marketAdapter.notificationFromRecyclerView = this
         binding.homeMarketRv.adapter = marketAdapter
-        binding.homeMarketRv.layoutManager =
-            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        binding.homeMarketRv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
         // RECENT RV
         binding.homeRecentRoot.visibility = View.VISIBLE
         recentAdapter.dataset = recentDataset
         recentAdapter.activity = requireActivity()
         binding.homeRecentRv.adapter = recentAdapter
-        binding.homeRecentRv.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.homeRecentRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         // HOT MARKET RV
         binding.homeHotRoot.visibility = View.VISIBLE
         hotAdapter.dataset = hotDataset
         hotAdapter.activity = requireActivity()
         binding.homeHotRv.adapter = hotAdapter
-        binding.homeHotRv.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.homeHotRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         if (auth != null && userTypePref.getString(getString(R.string.USER_TYPE), "") == "") {
             val userTypeLiveData = UserTypeLiveData(userTypeRef)
@@ -147,13 +143,9 @@ class FragmentMarket : Fragment(), DataSetSizeListener, NetworkListener, OnClick
                 userTypeLiveData.observe(viewLifecycleOwner) { snapshot ->
                     val listOfUsers = (snapshot.value as java.util.HashMap<*, *>?)!!.toList()
                     for (user in listOfUsers) {
-                        val unIdentifiedData =
-                            ((user as Pair<*, *>).second as java.util.HashMap<*, *>)
+                        val unIdentifiedData = ((user as Pair<*, *>).second as java.util.HashMap<*, *>)
                         if (unIdentifiedData["userUID"] as String == auth.uid) {
-                            userTypePref.edit().putString(
-                                getString(R.string.USER_TYPE),
-                                unIdentifiedData["userType"] as String?
-                            ).apply()
+                            userTypePref.edit().putString(getString(R.string.USER_TYPE), unIdentifiedData["userType"] as String?).apply()
                             this.cancel("Finished")
                             break
                         }
@@ -180,10 +172,9 @@ class FragmentMarket : Fragment(), DataSetSizeListener, NetworkListener, OnClick
                                     if (recentDataset.size < 5) recentDataset.add(data)
                                     allDataKeys.add(uploadKey)
                                     requireActivity().runOnUiThread {
-                                        networkListener.networkAvailable()
                                         if (recentDataset.size < 5) recentAdapter.notifyItemInserted(recentDataset.size)
                                         marketAdapter.notifyItemInserted(allData.size)
-                                        dataReadyListener.stopLoadingShimmer()
+                                        dataReadyListener.dataReady()
                                     }
                                 } catch (e: Exception) {
                                     println("Exception *************** $${e.printStackTrace()}")
@@ -211,7 +202,7 @@ class FragmentMarket : Fragment(), DataSetSizeListener, NetworkListener, OnClick
                     } catch (e: Exception) {
                     } finally {
                         delay(2_000)
-                        if(isAdded) requireActivity().runOnUiThread { hotAdapter.notifyItemInserted(index) }
+                        if (isAdded) requireActivity().runOnUiThread { hotAdapter.notifyItemInserted(index) }
                     }
                 }
             }
@@ -232,11 +223,11 @@ class FragmentMarket : Fragment(), DataSetSizeListener, NetworkListener, OnClick
 
     override fun noNetwork() {
         requireActivity().runOnUiThread {
+            binding.marketProgressIndicator.visibility = View.GONE
             binding.homeRecentRoot.visibility = View.GONE
             binding.homeHotRoot.visibility = View.GONE
             binding.fragmentMarketShimmerRoot.visibility = View.GONE
             binding.fragmentMarketDataRoot.visibility = View.VISIBLE
-            binding.fragmentMarketShimmer.stopShimmerAnimation()
         }
     }
 
@@ -249,7 +240,7 @@ class FragmentMarket : Fragment(), DataSetSizeListener, NetworkListener, OnClick
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.market_no_network -> refreshFragment()
-            R.id.market_user_icon ->{
+            R.id.market_user_icon -> {
                 startActivity(Intent(requireContext(), ActivityUserAccount::class.java))
                 requireActivity().overridePendingTransition(0, 0)
             }
@@ -268,29 +259,33 @@ class FragmentMarket : Fragment(), DataSetSizeListener, NetworkListener, OnClick
     override fun dataNotReady() {
         if (isAdded) {
             requireActivity().runOnUiThread {
+                binding.marketProgressIndicator.visibility = View.VISIBLE
                 binding.homeRecentRoot.visibility = View.GONE
                 binding.homeHotRoot.visibility = View.GONE
                 binding.fragmentMarketDataRoot.visibility = View.GONE
                 binding.fragmentMarketShimmerRoot.visibility = View.VISIBLE
-                binding.fragmentMarketShimmer.startShimmerAnimation()
             }
         }
     }
 
-    override fun stopLoadingShimmer() {
-        binding.homeRecentRoot.visibility = View.VISIBLE
-        binding.homeHotRoot.visibility = View.VISIBLE
-        binding.fragmentMarketDataRoot.visibility = View.VISIBLE
-        binding.fragmentMarketShimmerRoot.visibility = View.GONE
-        binding.fragmentMarketShimmer.stopShimmerAnimation()
+    override fun dataReady() {
+        if (isAdded) {
+            requireActivity().runOnUiThread {
+                binding.marketProgressIndicator.visibility = View.GONE
+                binding.homeRecentRoot.visibility = View.VISIBLE
+                binding.homeHotRoot.visibility = View.VISIBLE
+                binding.fragmentMarketDataRoot.visibility = View.VISIBLE
+                binding.marketNoNetwork.visibility = View.GONE
+                binding.fragmentMarketShimmerRoot.visibility = View.GONE
+            }
+        }
     }
 
     override fun inflateFragment() {
     }
 
     override fun registeredBuyerOrSeller() {
-        val userType = userTypePref.getString(getString(R.string.USER_TYPE), "")!!
-        when (userType) {
+        when (userTypePref.getString(getString(R.string.USER_TYPE), "")!!) {
             UserTypes.ADMIN -> userTypeListener.admin()
             UserTypes.SELLER -> userTypeListener.seller()
             UserTypes.BUYER -> userTypeListener.buyer()
@@ -356,7 +351,7 @@ interface FragmentReloadHelper {
 
 interface DataReadyListener {
     fun dataNotReady()
-    fun stopLoadingShimmer()
+    fun dataReady()
 }
 
 interface DataSetSizeListener {

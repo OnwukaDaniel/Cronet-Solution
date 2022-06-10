@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:background="?attr/colorSurface"
     android:id="@+id/market_root"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -49,8 +48,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?colorSecondary"
-            android:weightSum="20"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="20">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/home_page_toolbar"
@@ -103,106 +102,122 @@
 
         </LinearLayout>
 
-        <androidx.core.widget.NestedScrollView
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/market_progress_indicator"
             android:layout_width="match_parent"
-            android:layout_below="@+id/market_app_bar"
-            android:layout_height="match_parent">
+            android:elevation="5dp"
+            app:trackCornerRadius="30dp"
+            android:indeterminate="true"
+            android:layout_below="@id/market_app_bar"
+            android:layout_height="wrap_content" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/fragment_market_shimmer_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/market_progress_indicator">
 
             <LinearLayout
-                android:id="@+id/fragment_market_shimmer_root"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <com.facebook.shimmer.ShimmerFrameLayout
+                <LinearLayout
                     android:id="@+id/fragment_market_shimmer"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="12dp"
+                        android:layout_margin="5dp"
+                        android:background="@color/placeholder_color" />
+
+                    <GridLayout
+                        android:id="@+id/gridLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:columnCount="2"
+                        android:orientation="horizontal"
+                        android:rowCount="2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="20"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                        <TextView
-                            android:layout_width="150dp"
-                            android:layout_height="12dp"
-                            android:layout_margin="5dp"
-                            android:background="@color/placeholder_color" />
 
-                        <GridLayout
-                            android:id="@+id/gridLayout"
-                            android:layout_width="match_parent"
+                        <include
+                            layout="@layout/home_market_row_placeholder_small"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:columnCount="2"
-                            android:orientation="horizontal"
-                            android:rowCount="2"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_weight="20"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                            android:layout_columnWeight="10" />
 
-
-                            <include
-                                layout="@layout/home_market_row_placeholder_small"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_columnWeight="10" />
-
-                            <include
-                                layout="@layout/home_market_row_placeholder_small"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_columnWeight="10" />
-
-                        </GridLayout>
-
-                        <TextView
-                            android:layout_width="150dp"
-                            android:layout_height="12dp"
-                            android:layout_margin="5dp"
-                            android:background="@color/placeholder_color" />
-
-                        <GridLayout
-                            android:layout_width="match_parent"
+                        <include
+                            layout="@layout/home_market_row_placeholder_small"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:columnCount="2"
-                            android:orientation="horizontal"
-                            android:rowCount="2"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_weight="20"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/gridLayout">
+                            android:layout_columnWeight="10" />
 
-                            <include
-                                layout="@layout/home_market_row_placeholder"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_columnWeight="10" />
+                    </GridLayout>
 
-                            <include
-                                layout="@layout/home_market_row_placeholder"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_columnWeight="10" />
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="12dp"
+                        android:layout_margin="5dp"
+                        android:background="@color/placeholder_color" />
 
-                            <include
-                                layout="@layout/home_market_row_placeholder"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_columnWeight="10" />
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:columnCount="2"
+                        android:orientation="horizontal"
+                        android:rowCount="4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="20"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/gridLayout">
 
-                            <include
-                                layout="@layout/home_market_row_placeholder"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_columnWeight="10" />
+                        <include
+                            layout="@layout/home_market_row_placeholder"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="10" />
 
-                        </GridLayout>
+                        <include
+                            layout="@layout/home_market_row_placeholder"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="10" />
 
-                    </LinearLayout>
+                        <include
+                            layout="@layout/home_market_row_placeholder"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="10" />
 
-                </com.facebook.shimmer.ShimmerFrameLayout>
+                        <include
+                            layout="@layout/home_market_row_placeholder"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="10" />
+
+                        <include
+                            layout="@layout/home_market_row_placeholder"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="10" />
+
+                        <include
+                            layout="@layout/home_market_row_placeholder"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="10" />
+
+                    </GridLayout>
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -211,15 +226,15 @@
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
-            android:layout_below="@+id/market_app_bar"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/market_app_bar">
 
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:id="@+id/fragment_market_data_root"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone"
-                android:layout_marginVertical="5dp">
+                android:layout_marginVertical="5dp"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -245,9 +260,9 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/home_recent_rv"
                             android:layout_width="match_parent"
-                            android:background="?attr/colorSurface"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="5dp" />
+                            android:layout_marginHorizontal="5dp"
+                            android:background="?attr/colorSurface" />
 
                     </LinearLayout>
 
@@ -269,9 +284,9 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/home_hot_rv"
                             android:layout_width="match_parent"
-                            android:background="?attr/colorSurface"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="5dp" />
+                            android:layout_marginHorizontal="5dp"
+                            android:background="?attr/colorSurface" />
 
                     </LinearLayout>
 
@@ -294,8 +309,8 @@
                             android:id="@+id/home_market_rv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="?attr/colorSurface"
-                            android:layout_marginHorizontal="5dp" />
+                            android:layout_marginHorizontal="5dp"
+                            android:background="?attr/colorSurface" />
 
                     </LinearLayout>
 
@@ -314,7 +329,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:src="@drawable/no_network" />
+                        android:src="@drawable/no_network"
+                        app:tint="@color/placeholder_color" />
 
                     <TextView
                         android:layout_width="match_parent"

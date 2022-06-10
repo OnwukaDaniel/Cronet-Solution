@@ -100,9 +100,8 @@ class ActivitySearch : AppCompatActivity(), NetworkListener, OnEditorActionListe
                                 val txt = "Network error"
                                 if (productDataList.isEmpty()) {
                                     Snackbar.make(binding.root, txt, Snackbar.LENGTH_LONG).show()
-                                   runOnUiThread { networkListener.noNetwork() }
-                                }
-                                else doMySearchHasData(s)
+                                    runOnUiThread { networkListener.noNetwork() }
+                                } else doMySearchHasData(s)
                             }
                         }
                     } else doMySearchHasData(s)
@@ -122,7 +121,7 @@ class ActivitySearch : AppCompatActivity(), NetworkListener, OnEditorActionListe
             LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
         datasetOfQueryData.clear()
         datasetOfQueryResult.clear()
-        runOnUiThread{
+        runOnUiThread {
             datasetOfQueryData.clear()
             for ((index, value) in seoKeywords.withIndex()) { // ONE PRODUCT KEYWORD
                 for (keyword in value) {
@@ -225,7 +224,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val datum = dataset[position]
         holder.text.text = datum.productName
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
             activity.hideKeyboard()
             val fragmentSearchResult = FragmentSearchResult()
             val json = Gson().toJson(dataset)

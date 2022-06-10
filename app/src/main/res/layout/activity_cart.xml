@@ -81,12 +81,12 @@
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/cart_data_progress_indicator"
             android:layout_width="match_parent"
-            app:trackCornerRadius="30dp"
             android:layout_height="wrap_content"
+            android:layout_below="@id/cart_app_bar"
+            android:elevation="5dp"
             android:indeterminate="true"
             app:showAnimationBehavior="outward"
-            android:elevation="5dp"
-            android:layout_below="@id/cart_app_bar" />
+            app:trackCornerRadius="30dp" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cart_card_view"

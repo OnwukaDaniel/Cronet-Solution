@@ -49,19 +49,10 @@ class HomePage : AppCompatActivity(), OnItemReselectedListener, OnItemSelectedLi
         sfm = supportFragmentManager
         userTypeRef = userTypeRef.child("user type")
         fragmentMarket.reloadHelper = reloadHelper
-        sfm.beginTransaction().addToBackStack("market")
-            .replace(R.id.home_root, fragmentMarket, "market").commit()
+        sfm.beginTransaction().add(R.id.home_root, fragmentAccount).hide(fragmentAccount).commit()
+        sfm.beginTransaction().add(R.id.home_root, fragmentMarket).hide(fragmentMarket).commit()
+        sfm.beginTransaction().show(fragmentMarket).commit()
     }
-
-    /*override fun onResume() {
-        super.onResume()
-        val window = window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        window.statusBarColor = this.resources.getColor(R.color.black)
-        @RequiresApi(Build.VERSION_CODES.M)
-        window.statusBarColor = getColor(R.color.black)
-    }*/
 
     override fun onNavigationItemReselected(item: MenuItem) {
     }
@@ -69,16 +60,13 @@ class HomePage : AppCompatActivity(), OnItemReselectedListener, OnItemSelectedLi
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.home_menu_market -> {
-                sfm.beginTransaction().detach(fragmentMarket).commit()
-                fragmentMarket = FragmentMarket()
-                fragmentMarket.reloadHelper = this
-                sfm.beginTransaction().replace(R.id.home_root, fragmentMarket, "market")
-                    .commit()
+                sfm.beginTransaction().hide(fragmentAccount).commit()
+                sfm.beginTransaction().show(fragmentMarket).commit()
                 return true
             }
             R.id.home_menu_acct -> {
-                sfm.beginTransaction().replace(R.id.home_root, fragmentAccount, "account")
-                    .commit()
+                sfm.beginTransaction().hide(fragmentMarket).commit()
+                sfm.beginTransaction().show(fragmentAccount).commit()
                 return true
             }
         }
